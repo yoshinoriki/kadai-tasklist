@@ -1,0 +1,25 @@
+<%= form_with(model: task, local: true) do |form| %>
+  
+  <% if task.errors.any? %>
+      <div id="error_explanation">
+          <ul>
+              <% task.errors.full_messages.each do |msg| %>
+              <li>
+                  <%= msg %>
+              </li>
+              <% end %>
+          </ul>
+      </div>
+  <% end %>
+  
+  <%= form.label :content, 'タスク' %>
+  <%= form.text_field :content %>
+  
+  <%= form.label :status, 'status' %>
+  <%= form.text_field :status %>
+  
+  
+  <%= form.submit '登録' %>
+<% end %>
+
+<%= link_to '一覧に戻る', tasks_path %>
