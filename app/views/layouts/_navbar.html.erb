@@ -1,0 +1,33 @@
+<header>
+    <nav>
+        
+        <a href="/">Tasklist</a>
+        
+        <button type="button">
+            <span></span>
+        </button>
+        
+        <div>
+            <ul>
+                <% if logged_in? %>
+                    <li>
+                        <a href="#">
+                            <%= current_user.name %>
+                        </a>
+                        <li></li>
+                            <li>
+                                <%= link_to 'Logout', logout_path, method: :delete %>
+                            </li>
+                    </li>
+                <% else %>
+                    <li>
+                        <%= link_to 'Signup', signup_path, %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to 'Login' , login_path, %>
+                    </li>
+                <% end %>
+            </ul>   
+        </div>
+    </nav>
+</header>
