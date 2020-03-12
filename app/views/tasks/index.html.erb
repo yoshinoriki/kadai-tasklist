@@ -12,17 +12,20 @@
                     <th>status</th>
                 </tr>
             </thead>
-            <% @tasks.each do |task| %>
+            <% number = 1 %>
+            <% @tasks.each do |task | %>
                 <tbody>
                     <tr>
-                        <th><%= link_to task.id, task %></th>
+                        <th><%= link_to number, task %></th>
                         <td><%= task.content %></td>
                         <td><%= task.status %></td>
+                        <% number += 1 %>
                     </tr>
                 </tbody>
             <% end %> 
         </table>
     </ul>
+    <%= paginate @tasks %>
 <ul style="list-style: none">
    
    <li><%= link_to '新規タスクを登録する', new_task_path %></li>
