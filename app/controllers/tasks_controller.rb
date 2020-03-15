@@ -1,17 +1,13 @@
 class TasksController < ApplicationController
-    before_action :require_user_logged_in, only: [:show, :create, :edit, :update, :destroy, :new]
+    before_action :require_user_logged_in
     before_action :correct_user, only: [:show, :edit, :update, :destroy]
     
     def index
-      if logged_in?
-        @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-      else
-        redirect_to login_url
-      end
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
     end
     
     def show
-      @task = current_user.tasks.find(params[:id])
+      
     end
   
     def create
@@ -27,11 +23,11 @@ class TasksController < ApplicationController
     end
     
     def edit
-      @task = current_user.tasks.find(params[:id])
+      
     end
     
     def update
-      @task = current_user.tasks.find(params[:id])
+
         if @task.update(task_params)
           flash[:success] = 'Task は正常に更新されました'
           redirect_to @task
@@ -42,11 +38,13 @@ class TasksController < ApplicationController
     end
     
     def destroy
-      @task = current_user.tasks.find(params[:id])
-      @task.destroy
-      
+      if @task.destroy
       flash[:success] = 'Task は正常に削除されました'
-      redirect_to root_url
+        redirect_to root_url
+      else
+        flash[:danger] = 'Task は削除されませんでした'
+        render :edit
+      end  
     end
     
     def new
